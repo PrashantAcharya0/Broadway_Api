@@ -1,13 +1,18 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
+const dbUserName = process.env.dbUserName;
+const dbPassword = encodeURIComponent(process.env.dbPassword);
+const dbHost = process.env.dbHost;
+const dbName = process.env.dbName;
+const dbOptions = process.env.dbOptions;
 const connectDB = async () => {
   try {
     await mongoose.connect(
-      `mongodb+srv://acharyaprashant16:theblitheguy12@cluster0.orjro45.mongodb.net/kec-broadway?retryWrites=true&w=majority&appName=Cluster0`
+      `mongodb+srv://${dbUserName}:${dbPassword}@${dbHost}/${dbName}?${dbOptions}`
     );
-    console.log("DB connection established...");
+    console.log('Connected to database');
   } catch (error) {
-    console.log("DB connection failed...");
+    console.log('DB connection failed...');
     console.log(error.message);
     process.exit();
   }
